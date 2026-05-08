@@ -165,51 +165,51 @@
      ───────────────────────────────────────────── */
   .hero {
     text-align: center;
-    padding: 100px 0 72px;
+    padding: 96px 0 80px;
     position: relative;
   }
   .hero-logo-wrap {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 112px; height: 112px;
-    margin-bottom: 36px;
+    width: 130px; height: 130px;
+    margin-bottom: 40px;
     position: relative;
-    animation: float 4s ease-in-out infinite, fadeUp 0.9s ease-out;
+    animation: float 4s ease-in-out infinite, fadeUp 1s ease-out;
   }
   .hero-logo-wrap::before {
     content: '';
     position: absolute;
-    inset: -20%;
+    inset: -22%;
     background: radial-gradient(circle, rgba(0,217,166,0.35), transparent 70%);
-    filter: blur(20px);
+    filter: blur(22px);
     z-index: -1;
-    animation: pulse 4s ease-in-out infinite;
+    animation: pulse-glow 4s ease-in-out infinite;
   }
   .hero-logo {
     width: 100%; height: 100%;
-    filter: drop-shadow(0 12px 32px rgba(0, 217, 166, 0.3));
+    filter: drop-shadow(0 14px 36px rgba(0, 217, 166, 0.35));
   }
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+    50% { transform: translateY(-10px); }
   }
-  @keyframes pulse {
-    0%, 100% { opacity: 0.6; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.1); }
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.08); }
   }
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
   .hero h1 {
-    font-size: clamp(40px, 6vw, 64px);
+    font-size: clamp(36px, 5.5vw, 56px);
     font-weight: 700;
     letter-spacing: -0.04em;
     line-height: 1.05;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
     background: linear-gradient(180deg, #ffffff 0%, #b8c5d1 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -219,18 +219,21 @@
   .hero-subtitle {
     font-size: clamp(16px, 2vw, 19px);
     color: var(--text-secondary);
-    max-width: 560px;
+    max-width: 580px;
     margin: 0 auto 36px;
+    padding: 0 8px;
     font-weight: 300;
-    line-height: 1.5;
+    line-height: 1.55;
     animation: fadeUp 0.9s 0.2s both ease-out;
   }
 
-  /* Tagline avec lignes décoratives — comme WelcomeScreen */
+  /* Tagline (bottom of hero) — same as landing/support */
   .tagline {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: center;
     gap: 16px;
+    flex-wrap: nowrap;
     animation: fadeUp 0.9s 0.3s both ease-out;
   }
   .tagline-line {
@@ -238,6 +241,7 @@
     height: 1px;
     background: var(--text-muted);
     opacity: 0.4;
+    flex-shrink: 0;
   }
   .tagline-text {
     font-family: var(--font-mono);
@@ -369,7 +373,7 @@
      ───────────────────────────────────────────── */
   .nope-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
     margin: 18px 0;
     list-style: none;
@@ -383,8 +387,9 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     color: var(--text-secondary);
-    font-size: 14.5px;
+    font-size: 14px;
     transition: all 0.25s ease;
+    min-width: 0;
   }
   .nope-list li:hover {
     border-color: rgba(255, 107, 107, 0.3);
@@ -465,8 +470,8 @@
      ───────────────────────────────────────────── */
   .crypto-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
     margin: 28px 0;
   }
   .crypto-card {
@@ -678,21 +683,79 @@
   body[data-current-lang="fr"] [data-lang-inline="en"] { display: none; }
 
   /* ─────────────────────────────────────────────
-     Mobile
+     Responsive — tablet, mobile, and tiny phones
      ───────────────────────────────────────────── */
-  @media (max-width: 640px) {
+
+  /* Tablet & small laptop */
+  @media (max-width: 960px) {
+    .crypto-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .nope-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  /* Tablet portrait & large mobile */
+  @media (max-width: 760px) {
     .container { padding: 0 20px; }
-    .topbar-inner { padding: 12px 20px; }
-    .hero { padding: 60px 0 48px; }
-    .hero-logo-wrap { width: 88px; height: 88px; margin-bottom: 28px; }
-    .meta-strip { gap: 6px 18px; padding: 14px 18px; font-size: 11px; }
-    .highlight { padding: 22px 22px 22px 28px; margin: 36px 0 60px; }
-    .section-head { gap: 12px; }
-    .data-table th, .data-table td { padding: 12px 14px; font-size: 13px; }
-    .data-table th { font-size: 11px; }
-    .crypto-grid { grid-template-columns: 1fr; }
+    .topbar-inner { padding: 12px 18px; gap: 10px; }
+    .hero { padding: 64px 0 48px; }
+    .hero-logo-wrap { width: 110px; height: 110px; margin-bottom: 32px; }
+    .hero-subtitle { padding: 0 4px; }
+    .tagline { gap: 12px; }
+    .tagline-line { width: 22px; }
+    .tagline-text { font-size: 10.5px; letter-spacing: 0.16em; }
+    .meta-strip { gap: 6px 18px; padding: 14px 18px; font-size: 11px; margin-top: 44px; }
+    .highlight { padding: 22px 22px 22px 28px; margin: 36px 0 56px; }
+    .section-head { gap: 12px; padding-bottom: 12px; margin-bottom: 18px; }
+    .section-head h2 { font-size: clamp(20px, 5vw, 26px); }
+    .data-table-wrap { border-radius: 12px; }
+    .data-table th, .data-table td { padding: 11px 12px; font-size: 12.5px; }
+    .data-table th { font-size: 10.5px; letter-spacing: 0.06em; }
+    .crypto-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .nope-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .services-list { gap: 10px; }
+    .service { padding: 16px 18px; }
+    .steps li { padding-left: 52px; }
+    section.policy-section { margin: 52px 0; }
+  }
+
+  /* Small mobile */
+  @media (max-width: 480px) {
+    .container { padding: 0 16px; }
+    .topbar-inner { padding: 10px 16px; }
+    .brand-logo { width: 22px; height: 22px; }
+    .brand span { font-size: 14px; }
+    .lang-toggle button { padding: 5px 11px; font-size: 10.5px; }
+    .hero { padding: 48px 0 40px; }
+    .hero-logo-wrap { width: 96px; height: 96px; margin-bottom: 28px; }
+    .hero-subtitle { font-size: 14.5px; }
+    .tagline { gap: 10px; }
+    .tagline-line { width: 16px; }
+    .tagline-text { font-size: 10px; letter-spacing: 0.14em; }
+    .meta-strip { gap: 4px 12px; padding: 12px 16px; font-size: 10.5px; }
+    .meta-strip strong { margin-right: 4px; }
+    .meta-strip .dot { display: none; }
+    .highlight { padding: 20px 20px 20px 24px; }
+    .highlight-label { font-size: 10.5px; }
+    .highlight p { font-size: 14.5px; }
+    .data-table-wrap { overflow-x: auto; }
+    .data-table { min-width: 480px; }
     .nope-list { grid-template-columns: 1fr; }
-    .steps li { padding-left: 56px; }
+    .nope-list li { padding: 12px 14px; font-size: 13.5px; }
+    .crypto-grid { grid-template-columns: 1fr; }
+    .crypto-card { padding: 16px 18px; }
+    .crypto-card-name { font-size: 12.5px; }
+    .crypto-card-desc { font-size: 13px; }
+    .service-name { font-size: 14.5px; }
+    .service-desc { font-size: 13.5px; }
+    .steps li { padding-left: 48px; padding-right: 18px; padding-top: 16px; padding-bottom: 16px; font-size: 13.5px; }
+    .steps li::before { left: 18px; }
+    .footer-nav { gap: 10px; font-size: 11px; }
+  }
+
+  /* Tiny phones (iPhone SE, etc.) */
+  @media (max-width: 360px) {
+    .container { padding: 0 14px; }
+    .hero-logo-wrap { width: 84px; height: 84px; margin-bottom: 22px; }
+    .data-table { min-width: 420px; }
   }
 
   /* Reduced motion */

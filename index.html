@@ -198,64 +198,42 @@
   }
 
   /* ─────────────────────────────────────────────
-     Hero
+     Hero — standardized across all pages
      ───────────────────────────────────────────── */
   .hero {
     text-align: center;
-    padding: 110px 0 90px;
+    padding: 96px 0 80px;
     position: relative;
   }
   .hero-logo-wrap {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 140px; height: 140px;
-    margin-bottom: 44px;
+    width: 130px; height: 130px;
+    margin-bottom: 40px;
     position: relative;
     animation: float 4s ease-in-out infinite, fadeUp 1s ease-out;
   }
   .hero-logo-wrap::before {
     content: '';
     position: absolute;
-    inset: -25%;
-    background: radial-gradient(circle, rgba(0,217,166,0.4), transparent 70%);
-    filter: blur(24px);
+    inset: -22%;
+    background: radial-gradient(circle, rgba(0,217,166,0.35), transparent 70%);
+    filter: blur(22px);
     z-index: -1;
     animation: pulse-glow 4s ease-in-out infinite;
   }
   .hero-logo {
     width: 100%; height: 100%;
-    filter: drop-shadow(0 16px 40px rgba(0, 217, 166, 0.4));
-  }
-
-  .hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--primary);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    animation: fadeUp 0.9s 0.05s both ease-out;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--primary);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--primary);
-    animation: blink 2s infinite;
+    filter: drop-shadow(0 14px 36px rgba(0, 217, 166, 0.35));
   }
 
   .hero h1 {
-    font-size: clamp(44px, 7vw, 78px);
+    font-size: clamp(40px, 6.5vw, 72px);
     font-weight: 800;
     letter-spacing: -0.045em;
-    line-height: 1.02;
-    margin-bottom: 24px;
+    line-height: 1.04;
+    margin-bottom: 22px;
     background: linear-gradient(180deg, #ffffff 0%, #a8b8c8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -269,15 +247,18 @@
     background-clip: text;
   }
   .hero-subtitle {
-    font-size: clamp(17px, 2.2vw, 21px);
+    font-size: clamp(16px, 2vw, 20px);
     color: var(--text-secondary);
-    max-width: 640px;
-    margin: 0 auto 40px;
+    max-width: 620px;
+    margin: 0 auto 36px;
+    padding: 0 8px;
     font-weight: 300;
     line-height: 1.55;
     animation: fadeUp 0.9s 0.2s both ease-out;
   }
+  .hero-subtitle strong { color: var(--text); font-weight: 600; }
 
+  /* CTA block */
   .hero-cta {
     display: flex;
     align-items: center;
@@ -289,8 +270,10 @@
   .btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
-    padding: 14px 26px;
+    min-height: 46px;
+    padding: 12px 24px;
     border-radius: 12px;
     font-weight: 600;
     font-size: 15px;
@@ -298,6 +281,7 @@
     transition: all 0.25s ease;
     border: 1px solid transparent;
     cursor: pointer;
+    white-space: nowrap;
   }
   .btn-primary {
     background: var(--primary);
@@ -321,22 +305,31 @@
   }
   .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
 
-  .hero-tag {
+  /* Tagline (bottom of hero) */
+  .tagline {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 16px;
-    margin-top: 56px;
+    margin-top: 52px;
+    flex-wrap: nowrap;
     animation: fadeUp 0.9s 0.4s both ease-out;
   }
-  .hero-tag-line { width: 28px; height: 1px; background: var(--text-muted); opacity: 0.4; }
-  .hero-tag-text {
+  .tagline-line {
+    width: 28px;
+    height: 1px;
+    background: var(--text-muted);
+    opacity: 0.4;
+    flex-shrink: 0;
+  }
+  .tagline-text {
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 600;
     color: var(--text-muted);
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
+    white-space: nowrap;
   }
 
   /* ─────────────────────────────────────────────
@@ -452,8 +445,8 @@
      ───────────────────────────────────────────── */
   .steps-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
     margin: 36px 0;
   }
   .step-card {
@@ -593,30 +586,140 @@
   }
 
   /* ─────────────────────────────────────────────
-     Architecture diagram
+     Architecture diagram — unified grid (desktop + mobile)
      ───────────────────────────────────────────── */
   .arch-wrap {
-    margin: 40px 0;
-    padding: 36px 24px 32px;
+    margin: 36px 0;
+    padding: 28px 24px 24px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 18px;
-    overflow-x: auto;
   }
-  .arch-svg {
-    width: 100%;
-    min-width: 720px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
+  .arch-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    margin-bottom: 28px;
+    background: var(--surface-light);
+    border: 1px solid rgba(0, 217, 166, 0.2);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    text-align: center;
   }
+
+  /* Flow grid — 4 cols + 3 arrows on desktop, 1 col + ↓ on mobile */
+  .arch-flow {
+    display: grid;
+    grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 1fr;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .arch-step {
+    position: relative;
+    padding: 18px 16px 16px;
+    background: var(--surface-light);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--step-color, var(--primary));
+    border-radius: 12px;
+    min-width: 0; /* Allow shrinking */
+  }
+  .arch-step[data-color="primary"]   { --step-color: var(--primary); }
+  .arch-step[data-color="warning"]   { --step-color: var(--warning); }
+  .arch-step[data-color="accent"]    { --step-color: var(--accent); }
+  .arch-step[data-color="secondary"] { --step-color: var(--secondary); }
+
+  .arch-step-tag {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--step-color, var(--primary));
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .arch-step-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  .arch-step-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    line-height: 1.55;
+  }
+  .arch-step-list li {
+    color: var(--text-secondary);
+    padding-left: 13px;
+    position: relative;
+    margin: 3px 0;
+    word-wrap: break-word;
+  }
+  .arch-step-list li.row-sees::before {
+    content: '●';
+    color: var(--warning);
+    position: absolute;
+    left: 0;
+    font-size: 8px;
+    top: 5px;
+    line-height: 1;
+  }
+  .arch-step-list li.row-blind::before {
+    content: '○';
+    color: var(--primary);
+    position: absolute;
+    left: 0;
+    font-size: 8px;
+    top: 5px;
+    line-height: 1;
+  }
+
+  /* Arrow between steps */
+  .arch-step-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    opacity: 0.5;
+    transition: transform 0.3s ease;
+  }
+  .arch-step-arrow svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 1.8;
+  }
+
+  .arch-footnote {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--border);
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
   .arch-legend {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 24px 32px;
-    margin-top: 24px;
-    padding-top: 24px;
+    gap: 16px 32px;
+    margin-top: 18px;
+    padding-top: 18px;
     border-top: 1px solid var(--border);
     font-family: var(--font-mono);
     font-size: 11.5px;
@@ -756,7 +859,7 @@
      ───────────────────────────────────────────── */
   .refs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 14px;
     margin: 32px 0;
   }
@@ -936,20 +1039,116 @@
   body[data-current-lang="fr"] [data-lang-inline="en"] { display: none; }
 
   /* ─────────────────────────────────────────────
-     Mobile
+     Responsive — tablet, mobile, and tiny phones
      ───────────────────────────────────────────── */
+
+  /* Tablet & small laptop */
+  @media (max-width: 960px) {
+    .topbar-actions { gap: 12px; }
+    .nav-link { font-size: 11px; }
+    .stats { grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 26px 20px; }
+    section.lp { margin: 90px 0; }
+    .crypto-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .refs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .arch-step-list { font-size: 11px; }
+    .arch-step-name { font-size: 13px; }
+    .arch-step-tag { font-size: 9px; }
+  }
+
+  /* Tablet portrait & large mobile — stack architecture flow */
   @media (max-width: 760px) {
     .container { padding: 0 20px; }
-    .topbar-inner { padding: 12px 20px; gap: 8px; }
+    .topbar-inner { padding: 12px 18px; gap: 10px; }
     .nav-link { display: none; }
-    .hero { padding: 70px 0 60px; }
-    .hero-logo-wrap { width: 104px; height: 104px; margin-bottom: 32px; }
-    .stats { grid-template-columns: 1fr 1fr; padding: 24px 20px; gap: 20px 16px; }
-    section.lp { margin: 80px 0; }
+    .hero { padding: 64px 0 48px; }
+    .hero-logo-wrap { width: 110px; height: 110px; margin-bottom: 32px; }
+    .hero-subtitle { padding: 0 4px; }
+    .hero-cta { gap: 10px; }
+    .btn { padding: 11px 20px; font-size: 14px; min-height: 44px; }
+    .tagline { gap: 12px; margin-top: 40px; }
+    .tagline-line { width: 22px; }
+    .tagline-text { font-size: 10.5px; letter-spacing: 0.16em; }
+    .stats { grid-template-columns: repeat(4, 1fr); padding: 22px 14px; gap: 14px; margin: 44px 0 80px; border-radius: 16px; }
+    .stat-num { font-size: 26px; }
+    section.lp { margin: 72px 0; }
+    .section-title { font-size: clamp(26px, 6vw, 36px); }
+    .section-lead { font-size: 15.5px; }
     .threat-grid { grid-template-columns: 1fr; }
-    .matrix th, .matrix td { padding: 11px 12px; font-size: 13px; }
-    .matrix th { font-size: 10px; }
-    .final-cta { padding: 48px 22px; margin: 60px 0; }
+    .crypto-stack { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .refs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    /* Architecture: vertical stack with rotated arrows */
+    .arch-flow {
+      grid-template-columns: 1fr;
+      grid-auto-rows: auto;
+    }
+    .arch-step-arrow {
+      padding: 6px 0;
+      transform: none;
+    }
+    .arch-step-arrow svg {
+      transform: rotate(90deg);
+      width: 22px; height: 22px;
+    }
+    .arch-step-list { font-size: 12.5px; }
+    .arch-step-name { font-size: 15px; }
+    .arch-wrap { padding: 22px 18px; }
+    .arch-title { font-size: 12.5px; padding: 9px 14px; margin-bottom: 22px; }
+
+    .matrix-wrap { overflow-x: auto; }
+    .matrix { min-width: 560px; }
+    .matrix th, .matrix td { padding: 10px 10px; font-size: 12.5px; }
+    .matrix th { font-size: 10px; letter-spacing: 0.06em; }
+    .seen, .blind { padding: 3px 7px; font-size: 10px; }
+    .final-cta { padding: 44px 22px; margin: 56px 0 80px; border-radius: 18px; }
+    .final-cta-buttons { flex-direction: column; align-items: stretch; }
+    .final-cta-buttons .btn { width: 100%; }
+  }
+
+  /* Small mobile */
+  @media (max-width: 480px) {
+    .container { padding: 0 16px; }
+    .topbar-inner { padding: 10px 16px; }
+    .brand-logo { width: 22px; height: 22px; }
+    .brand span { font-size: 14px; }
+    .lang-toggle button { padding: 5px 11px; font-size: 10.5px; }
+    .hero { padding: 48px 0 40px; }
+    .hero-logo-wrap { width: 96px; height: 96px; margin-bottom: 28px; }
+    .hero h1 { letter-spacing: -0.035em; }
+    .hero-subtitle { font-size: 14.5px; line-height: 1.55; }
+    .hero-cta .btn { width: 100%; }
+    .tagline { gap: 10px; margin-top: 36px; }
+    .tagline-line { width: 16px; }
+    .tagline-text { font-size: 10px; letter-spacing: 0.14em; }
+    .stats { grid-template-columns: repeat(2, 1fr); padding: 20px 16px; gap: 18px 12px; }
+    .stat-num { font-size: 26px; }
+    .stat-label { font-size: 10px; letter-spacing: 0.08em; }
+    section.lp { margin: 60px 0; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .step-card { padding: 22px 20px; }
+    .proto-card { padding: 22px 20px; }
+    .refs-grid { grid-template-columns: 1fr; }
+    .arch-wrap { padding: 18px 14px; border-radius: 14px; }
+    .arch-step { padding: 16px 14px 14px; }
+    .arch-step-name { font-size: 14px; }
+    .arch-step-list { font-size: 12px; }
+    .arch-legend { gap: 12px 18px; font-size: 10.5px; padding-top: 16px; margin-top: 16px; }
+    .matrix-wrap { border-radius: 12px; }
+    .matrix th, .matrix td { padding: 8px 8px; font-size: 11.5px; }
+    .matrix th { font-size: 9px; }
+    .seen, .blind { padding: 2px 5px; font-size: 9.5px; }
+    .threat-col { padding: 22px 20px; }
+    .ref-card { padding: 16px 18px; }
+    .footer-nav { gap: 10px; font-size: 11px; }
+  }
+
+  /* Tiny phones (iPhone SE, etc.) */
+  @media (max-width: 360px) {
+    .container { padding: 0 14px; }
+    .hero-logo-wrap { width: 84px; height: 84px; margin-bottom: 22px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat-num { font-size: 22px; }
   }
 
   /* Reduced motion */
@@ -996,9 +1195,6 @@
       <img class="hero-logo" src="./assets/icon_nobg.png" alt="Ghostr">
     </div>
 
-    <div class="hero-eyebrow" data-lang-inline="fr">Messagerie chiffrée · Post-quantique · Anonyme</div>
-    <div class="hero-eyebrow" data-lang-inline="en">Encrypted messenger · Post-quantum · Anonymous</div>
-
     <h1 data-lang="fr">Vos conversations.<br>Et personne <span class="accent">d'autre</span>.</h1>
     <h1 data-lang="en">Your conversations.<br>And <span class="accent">nobody</span> else.</h1>
 
@@ -1026,11 +1222,11 @@
       <a href="#crypto" class="btn btn-ghost" data-lang-inline="en">Cryptographic stack</a>
     </div>
 
-    <div class="hero-tag">
-      <span class="hero-tag-line"></span>
-      <span class="hero-tag-text" data-lang-inline="fr">Privé · Anonyme · Chiffré</span>
-      <span class="hero-tag-text" data-lang-inline="en">Private · Anonymous · Encrypted</span>
-      <span class="hero-tag-line"></span>
+    <div class="tagline">
+      <span class="tagline-line"></span>
+      <span class="tagline-text" data-lang-inline="fr">Privé · Anonyme · Chiffré</span>
+      <span class="tagline-text" data-lang-inline="en">Private · Anonymous · Encrypted</span>
+      <span class="tagline-line"></span>
     </div>
   </header>
 
@@ -1545,98 +1741,94 @@
     </p>
 
     <div class="arch-wrap">
-      <svg class="arch-svg" viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <!-- Gradients per box -->
-          <linearGradient id="gA" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#00D9A6" stop-opacity="0.18"/>
-            <stop offset="1" stop-color="#00D9A6" stop-opacity="0.04"/>
-          </linearGradient>
-          <linearGradient id="gB" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#FFB547" stop-opacity="0.16"/>
-            <stop offset="1" stop-color="#FFB547" stop-opacity="0.04"/>
-          </linearGradient>
-          <linearGradient id="gC" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#7B61FF" stop-opacity="0.18"/>
-            <stop offset="1" stop-color="#7B61FF" stop-opacity="0.04"/>
-          </linearGradient>
-          <linearGradient id="gD" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#00B4D8" stop-opacity="0.18"/>
-            <stop offset="1" stop-color="#00B4D8" stop-opacity="0.04"/>
-          </linearGradient>
-          <!-- Arrow marker -->
-          <marker id="arr" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto">
-            <path d="M0 0L9 6L0 12z" fill="#5D7485"/>
-          </marker>
-          <marker id="arrG" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto">
-            <path d="M0 0L9 6L0 12z" fill="#00D9A6"/>
-          </marker>
-        </defs>
 
-        <!-- Alice (sender) -->
-        <g>
-          <rect x="20" y="100" width="130" height="120" rx="14" fill="url(#gA)" stroke="#00D9A6" stroke-width="1.5"/>
-          <text x="85" y="128" fill="#00D9A6" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" letter-spacing="2" text-anchor="middle">CLIENT</text>
-          <text x="85" y="152" fill="#F0F4F8" font-family="Geist, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Alice</text>
-          <text x="85" y="174" fill="#8BA4B8" font-family="Geist, sans-serif" font-size="11" text-anchor="middle">Triple Ratchet</text>
-          <text x="85" y="190" fill="#8BA4B8" font-family="Geist, sans-serif" font-size="11" text-anchor="middle">Sealed Sender</text>
-          <text x="85" y="206" fill="#8BA4B8" font-family="Geist, sans-serif" font-size="11" text-anchor="middle">OHTTP encrypt</text>
-        </g>
+      <!-- Title strip -->
+      <div class="arch-title">
+        <span data-lang-inline="fr">Flux d'un message — split-trust à 3 niveaux</span>
+        <span data-lang-inline="en">A message's flow — 3-tier split-trust</span>
+      </div>
 
-        <!-- Cloudflare Relay -->
-        <g>
-          <rect x="195" y="80" width="140" height="160" rx="14" fill="url(#gB)" stroke="#FFB547" stroke-width="1.5"/>
-          <text x="265" y="108" fill="#FFB547" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" letter-spacing="2" text-anchor="middle">RELAY</text>
-          <text x="265" y="132" fill="#F0F4F8" font-family="Geist, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Cloudflare</text>
-          <text x="265" y="156" fill="#FFB547" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">● voit IP</text>
-          <text x="265" y="174" fill="#00D9A6" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">○ pas le contenu</text>
-          <text x="265" y="192" fill="#00D9A6" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">○ pas l'expéditeur</text>
-          <text x="265" y="210" fill="#00D9A6" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">○ pas le destinataire</text>
-          <text x="265" y="228" fill="#5D7485" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="middle">strips IP, forwards blob</text>
-        </g>
+      <!-- Unified responsive grid: 4 cols + arrows on desktop, 1 col + ↓ on mobile -->
+      <div class="arch-flow">
 
-        <!-- OHTTP Gateway -->
-        <g>
-          <rect x="380" y="80" width="140" height="160" rx="14" fill="url(#gC)" stroke="#7B61FF" stroke-width="1.5"/>
-          <text x="450" y="108" fill="#7B61FF" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" letter-spacing="2" text-anchor="middle">GATEWAY</text>
-          <text x="450" y="132" fill="#F0F4F8" font-family="Geist, sans-serif" font-size="15" font-weight="700" text-anchor="middle">OHTTP</text>
-          <text x="450" y="156" fill="#FFB547" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">● voit la requête RPC</text>
-          <text x="450" y="174" fill="#00D9A6" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">○ pas votre IP</text>
-          <text x="450" y="192" fill="#00D9A6" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">○ pas le contenu E2E</text>
-          <text x="450" y="210" fill="#00D9A6" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">○ pas l'expéditeur</text>
-          <text x="450" y="228" fill="#5D7485" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="middle">decrypt outer, route</text>
-        </g>
+        <div class="arch-step" data-color="primary">
+          <div class="arch-step-tag">CLIENT · ALICE</div>
+          <div class="arch-step-name" data-lang-inline="fr">Votre appareil</div>
+          <div class="arch-step-name" data-lang-inline="en">Your device</div>
+          <ul class="arch-step-list">
+            <li class="row-blind">Triple Ratchet (E2E)</li>
+            <li class="row-blind">Sealed Sender</li>
+            <li class="row-blind">OHTTP encrypt</li>
+          </ul>
+        </div>
 
-        <!-- Supabase storage -->
-        <g>
-          <rect x="565" y="80" width="140" height="160" rx="14" fill="url(#gD)" stroke="#00B4D8" stroke-width="1.5"/>
-          <text x="635" y="108" fill="#00B4D8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" letter-spacing="2" text-anchor="middle">STORE</text>
-          <text x="635" y="132" fill="#F0F4F8" font-family="Geist, sans-serif" font-size="15" font-weight="700" text-anchor="middle">Supabase</text>
-          <text x="635" y="156" fill="#FFB547" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">● tag destinataire</text>
-          <text x="635" y="174" fill="#00D9A6" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">○ pas le contenu E2E</text>
-          <text x="635" y="192" fill="#00D9A6" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">○ pas l'expéditeur</text>
-          <text x="635" y="210" fill="#00D9A6" font-family="JetBrains Mono, monospace" font-size="10.5" text-anchor="middle">○ supprimé après livraison</text>
-          <text x="635" y="228" fill="#5D7485" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="middle">stores opaque blob ≤ 7d</text>
-        </g>
+        <div class="arch-step-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
 
-        <!-- Bob -->
-        <g opacity="0.85">
-          <text x="400" y="295" fill="#5D7485" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">→ Bob poll, decrypts locally with his ratchet state</text>
-        </g>
+        <div class="arch-step" data-color="warning">
+          <div class="arch-step-tag">RELAY · CLOUDFLARE</div>
+          <div class="arch-step-name">Cloudflare Worker</div>
+          <ul class="arch-step-list">
+            <li class="row-sees" data-lang-inline="fr">voit votre IP</li>
+            <li class="row-sees" data-lang-inline="en">sees your IP</li>
+            <li class="row-blind" data-lang-inline="fr">pas le contenu</li>
+            <li class="row-blind" data-lang-inline="en">blind to content</li>
+            <li class="row-blind" data-lang-inline="fr">pas l'expéditeur</li>
+            <li class="row-blind" data-lang-inline="en">blind to sender</li>
+            <li class="row-blind" data-lang-inline="fr">pas le destinataire</li>
+            <li class="row-blind" data-lang-inline="en">blind to recipient</li>
+          </ul>
+        </div>
 
-        <!-- Arrows -->
-        <path d="M150 160 L195 160" stroke="#00D9A6" stroke-width="2" fill="none" marker-end="url(#arrG)"/>
-        <path d="M335 160 L380 160" stroke="#5D7485" stroke-width="2" fill="none" marker-end="url(#arr)"/>
-        <path d="M520 160 L565 160" stroke="#5D7485" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+        <div class="arch-step-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
 
-        <!-- Top label -->
-        <text x="172" y="148" fill="#00D9A6" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">encrypted</text>
-        <text x="172" y="180" fill="#00D9A6" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">+ pinned</text>
+        <div class="arch-step" data-color="accent">
+          <div class="arch-step-tag">GATEWAY · OHTTP</div>
+          <div class="arch-step-name">OHTTP Gateway</div>
+          <ul class="arch-step-list">
+            <li class="row-sees" data-lang-inline="fr">voit la requête</li>
+            <li class="row-sees" data-lang-inline="en">sees the request</li>
+            <li class="row-blind" data-lang-inline="fr">pas votre IP</li>
+            <li class="row-blind" data-lang-inline="en">blind to your IP</li>
+            <li class="row-blind" data-lang-inline="fr">pas le contenu E2E</li>
+            <li class="row-blind" data-lang-inline="en">blind to E2E content</li>
+            <li class="row-blind" data-lang-inline="fr">pas l'expéditeur</li>
+            <li class="row-blind" data-lang-inline="en">blind to sender</li>
+          </ul>
+        </div>
 
-        <!-- Title strip -->
-        <rect x="20" y="30" width="685" height="32" rx="8" fill="#0F161C" stroke="#00D9A6" stroke-width="1" stroke-opacity="0.3"/>
-        <text x="362" y="51" fill="#F0F4F8" font-family="Geist, sans-serif" font-size="13" font-weight="600" text-anchor="middle">Flux d'un message — split-trust à 3 niveaux</text>
-      </svg>
+        <div class="arch-step-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
+
+        <div class="arch-step" data-color="secondary">
+          <div class="arch-step-tag">STORE · SUPABASE</div>
+          <div class="arch-step-name" data-lang-inline="fr">Stockage temporaire</div>
+          <div class="arch-step-name" data-lang-inline="en">Temporary storage</div>
+          <ul class="arch-step-list">
+            <li class="row-sees" data-lang-inline="fr">tag destinataire</li>
+            <li class="row-sees" data-lang-inline="en">recipient tag</li>
+            <li class="row-blind" data-lang-inline="fr">pas le contenu E2E</li>
+            <li class="row-blind" data-lang-inline="en">blind to E2E content</li>
+            <li class="row-blind" data-lang-inline="fr">pas l'expéditeur</li>
+            <li class="row-blind" data-lang-inline="en">blind to sender</li>
+            <li class="row-blind" data-lang-inline="fr">supprimé ≤ 7j</li>
+            <li class="row-blind" data-lang-inline="en">deleted ≤ 7d</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bob delivery note -->
+      <div class="arch-footnote" data-lang-inline="fr">
+        → Bob récupère le message et le déchiffre localement avec son état Triple Ratchet
+      </div>
+      <div class="arch-footnote" data-lang-inline="en">
+        → Bob fetches the message and decrypts it locally with his Triple Ratchet state
+      </div>
 
       <div class="arch-legend">
         <span class="arch-legend-item">

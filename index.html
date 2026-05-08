@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Ghostr</title>
+<meta name="description" content="Politique de confidentialité de Ghostr — Messagerie chiffrée de bout en bout, anonyme et privacy-first.">
+<meta name="theme-color" content="#0A0F14">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ─────────────────────────────────────────────
+     DESIGN TOKENS — Match Ghostr app theme
+     ───────────────────────────────────────────── */
+  :root {
+    /* Couleurs (depuis theme.ts) */
+    --primary: #00D9A6;
+    --primary-dark: #00B38A;
+    --primary-light: #00F5BD;
+    --secondary: #00B4D8;
+    --accent: #7B61FF;
+    --warning: #FFB547;
+    --error: #FF6B6B;
+
+    --bg: #0A0F14;
+    --surface: #0F161C;
+    --surface-light: #1A252F;
+    --surface-elevated: #243240;
+
+    --text: #F0F4F8;
+    --text-secondary: #8BA4B8;
+    --text-muted: #5D7485;
+
+    --border: rgba(139, 164, 184, 0.12);
+    --border-light: rgba(139, 164, 184, 0.06);
+    --divider: rgba(240, 244, 248, 0.06);
+
+    --glow: 0 0 60px rgba(0, 217, 166, 0.15);
+    --glow-strong: 0 0 80px rgba(0, 217, 166, 0.25);
+
+    /* Type */
+    --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ─────────────────────────────────────────────
+     Atmospheric background — radial glow + grain
+     ───────────────────────────────────────────── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 217, 166, 0.08), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 30%, rgba(123, 97, 255, 0.05), transparent 60%),
+      radial-gradient(ellipse 50% 30% at 10% 80%, rgba(0, 180, 216, 0.04), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: overlay;
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─────────────────────────────────────────────
+     Navigation — sticky lang switcher
+     ───────────────────────────────────────────── */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(10, 15, 20, 0.7);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.02em;
+  }
+  .brand-logo {
+    width: 24px; height: 24px;
+    filter: drop-shadow(0 0 8px rgba(0, 217, 166, 0.4));
+  }
+
+  .lang-toggle {
+    display: inline-flex;
+    background: var(--surface-light);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .lang-toggle button {
+    background: transparent;
+    border: 0;
+    color: var(--text-muted);
+    padding: 6px 14px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 999px;
+    transition: all 0.25s ease;
+  }
+  .lang-toggle button.active {
+    background: var(--primary);
+    color: var(--bg);
+    box-shadow: 0 0 16px rgba(0, 217, 166, 0.4);
+  }
+  .lang-toggle button:not(.active):hover { color: var(--text); }
+
+  /* ─────────────────────────────────────────────
+     Hero
+     ───────────────────────────────────────────── */
+  .hero {
+    text-align: center;
+    padding: 100px 0 72px;
+    position: relative;
+  }
+  .hero-logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 112px; height: 112px;
+    margin-bottom: 36px;
+    position: relative;
+    animation: float 4s ease-in-out infinite, fadeUp 0.9s ease-out;
+  }
+  .hero-logo-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(circle, rgba(0,217,166,0.35), transparent 70%);
+    filter: blur(20px);
+    z-index: -1;
+    animation: pulse 4s ease-in-out infinite;
+  }
+  .hero-logo {
+    width: 100%; height: 100%;
+    filter: drop-shadow(0 12px 32px rgba(0, 217, 166, 0.3));
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin-bottom: 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #b8c5d1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeUp 0.9s 0.1s both ease-out;
+  }
+  .hero-subtitle {
+    font-size: clamp(16px, 2vw, 19px);
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin: 0 auto 36px;
+    font-weight: 300;
+    line-height: 1.5;
+    animation: fadeUp 0.9s 0.2s both ease-out;
+  }
+
+  /* Tagline avec lignes décoratives — comme WelcomeScreen */
+  .tagline {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    animation: fadeUp 0.9s 0.3s both ease-out;
+  }
+  .tagline-line {
+    width: 28px;
+    height: 1px;
+    background: var(--text-muted);
+    opacity: 0.4;
+  }
+  .tagline-text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .meta-strip {
+    margin-top: 56px;
+    padding: 18px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 28px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--text-muted);
+    animation: fadeUp 0.9s 0.4s both ease-out;
+  }
+  .meta-strip strong {
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-right: 6px;
+  }
+  .meta-strip .dot {
+    color: var(--primary);
+    opacity: 0.6;
+  }
+
+  /* ─────────────────────────────────────────────
+     Highlight banner
+     ───────────────────────────────────────────── */
+  .highlight {
+    position: relative;
+    margin: 48px 0 80px;
+    padding: 28px 32px 28px 36px;
+    background: linear-gradient(135deg, rgba(0, 217, 166, 0.08), rgba(0, 180, 216, 0.04));
+    border: 1px solid rgba(0, 217, 166, 0.25);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .highlight::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--primary), var(--secondary));
+    box-shadow: 0 0 20px var(--primary);
+  }
+  .highlight-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .highlight-label::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--primary);
+    animation: blink 2s infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .highlight p {
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  /* ─────────────────────────────────────────────
+     Section
+     ───────────────────────────────────────────── */
+  section.policy-section {
+    margin: 64px 0;
+    scroll-margin-top: 80px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 22px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  .section-head h2 {
+    font-size: clamp(22px, 3vw, 28px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  section.policy-section p {
+    color: var(--text-secondary);
+    margin: 14px 0;
+    font-size: 15.5px;
+  }
+  section.policy-section p strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ─────────────────────────────────────────────
+     "We don't collect" list — with X icons
+     ───────────────────────────────────────────── */
+  .nope-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 10px;
+    margin: 18px 0;
+    list-style: none;
+  }
+  .nope-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-secondary);
+    font-size: 14.5px;
+    transition: all 0.25s ease;
+  }
+  .nope-list li:hover {
+    border-color: rgba(255, 107, 107, 0.3);
+    background: rgba(255, 107, 107, 0.04);
+    color: var(--text);
+  }
+  .nope-list li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 18px; height: 18px;
+    margin-top: 2px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF6B6B' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M18 6 6 18M6 6l12 12'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  /* ─────────────────────────────────────────────
+     Data table — modern dark style
+     ───────────────────────────────────────────── */
+  .data-table-wrap {
+    margin: 24px 0;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .data-table th {
+    background: var(--surface-light);
+    color: var(--text);
+    font-weight: 600;
+    text-align: left;
+    padding: 14px 18px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table td {
+    padding: 16px 18px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .data-table tr:last-child td { border-bottom: 0; }
+  .data-table tr:hover td { background: rgba(0, 217, 166, 0.03); }
+  .data-table td:first-child { color: var(--text); font-weight: 500; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .badge-no {
+    background: rgba(255, 107, 107, 0.1);
+    color: #FF8585;
+    border: 1px solid rgba(255, 107, 107, 0.2);
+  }
+  .badge-relay {
+    background: rgba(255, 181, 71, 0.1);
+    color: var(--warning);
+    border: 1px solid rgba(255, 181, 71, 0.2);
+  }
+
+  /* ─────────────────────────────────────────────
+     Crypto stack — protocol cards
+     ───────────────────────────────────────────── */
+  .crypto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+  .crypto-card {
+    position: relative;
+    padding: 20px 22px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  .crypto-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent-color, var(--primary));
+    opacity: 0.6;
+  }
+  .crypto-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color, var(--primary));
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 24px rgba(0, 217, 166, 0.1);
+  }
+  .crypto-card[data-color="primary"]   { --accent-color: var(--primary); }
+  .crypto-card[data-color="secondary"] { --accent-color: var(--secondary); }
+  .crypto-card[data-color="accent"]    { --accent-color: var(--accent); }
+  .crypto-card[data-color="warning"]   { --accent-color: var(--warning); }
+
+  .crypto-card-name {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--accent-color, var(--primary));
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .crypto-card-desc {
+    color: var(--text-secondary);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  /* ─────────────────────────────────────────────
+     Third-party services
+     ───────────────────────────────────────────── */
+  .services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 20px 0;
+    list-style: none;
+  }
+  .service {
+    padding: 18px 22px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: border-color 0.25s ease;
+  }
+  .service:hover { border-color: rgba(0, 217, 166, 0.3); }
+  .service-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .service-name { color: var(--text); font-weight: 600; font-size: 15px; }
+  .service-role {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    padding: 2px 8px;
+    background: var(--surface-light);
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+  }
+  .service-desc { color: var(--text-secondary); font-size: 14px; line-height: 1.55; }
+  .service-link {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(0, 217, 166, 0.3);
+    padding-bottom: 1px;
+  }
+  .service-link:hover { border-bottom-style: solid; }
+
+  /* ─────────────────────────────────────────────
+     Step list (deletion)
+     ───────────────────────────────────────────── */
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    margin: 22px 0;
+  }
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 18px 22px 18px 64px;
+    margin-bottom: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-secondary);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .steps li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 22px;
+    top: 18px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+  }
+  .steps li strong { color: var(--text); font-weight: 600; }
+
+  /* ─────────────────────────────────────────────
+     Inline elements
+     ───────────────────────────────────────────── */
+  code, .ph {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--surface-light);
+    color: var(--primary);
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    letter-spacing: -0.01em;
+  }
+  /* Placeholders bracketed [LIKE THIS] */
+  .ph {
+    background: rgba(255, 181, 71, 0.08);
+    color: var(--warning);
+    border-color: rgba(255, 181, 71, 0.2);
+  }
+
+  a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  a:hover { color: var(--primary-light); }
+
+  /* ─────────────────────────────────────────────
+     Footer
+     ───────────────────────────────────────────── */
+  footer {
+    margin-top: 100px;
+    padding: 56px 0 80px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .footer-tagline {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .footer-tagline-line { width: 32px; height: 1px; background: var(--text-muted); opacity: 0.3; }
+  .footer-tagline-text {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .footer-meta {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-family: var(--font-mono);
+  }
+  .footer-meta a { font-weight: 500; }
+
+  .footer-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .footer-nav a {
+    color: var(--text-secondary);
+    border-bottom: 1px dashed rgba(139, 164, 184, 0.25);
+    padding-bottom: 1px;
+    transition: all 0.2s ease;
+  }
+  .footer-nav a:hover {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+  .footer-sep { color: var(--text-muted); opacity: 0.5; }
+
+  /* ─────────────────────────────────────────────
+     Language visibility — hide opposite language only
+     ───────────────────────────────────────────── */
+  body[data-current-lang="en"] [data-lang="fr"],
+  body[data-current-lang="en"] [data-lang-inline="fr"] { display: none; }
+  body[data-current-lang="fr"] [data-lang="en"],
+  body[data-current-lang="fr"] [data-lang-inline="en"] { display: none; }
+
+  /* ─────────────────────────────────────────────
+     Mobile
+     ───────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .container { padding: 0 20px; }
+    .topbar-inner { padding: 12px 20px; }
+    .hero { padding: 60px 0 48px; }
+    .hero-logo-wrap { width: 88px; height: 88px; margin-bottom: 28px; }
+    .meta-strip { gap: 6px 18px; padding: 14px 18px; font-size: 11px; }
+    .highlight { padding: 22px 22px 22px 28px; margin: 36px 0 60px; }
+    .section-head { gap: 12px; }
+    .data-table th, .data-table td { padding: 12px 14px; font-size: 13px; }
+    .data-table th { font-size: 11px; }
+    .crypto-grid { grid-template-columns: 1fr; }
+    .nope-list { grid-template-columns: 1fr; }
+    .steps li { padding-left: 56px; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body data-current-lang="fr">
+
+<!-- ────────────────────────────────────────
+     TOPBAR (sticky)
+     ──────────────────────────────────────── -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <img class="brand-logo" src="./assets/icon_nobg.png" alt="Ghostr">
+      <span>Ghostr</span>
+    </div>
+    <div class="lang-toggle" role="tablist" aria-label="Language">
+      <button type="button" class="active" data-set-lang="fr" role="tab" aria-selected="true">FR</button>
+      <button type="button" data-set-lang="en" role="tab" aria-selected="false">EN</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════ -->
+  <header class="hero">
+    <div class="hero-logo-wrap">
+      <img class="hero-logo" src="./assets/icon_nobg.png" alt="Ghostr">
+    </div>
+
+    <h1 data-lang="fr">Politique de confidentialité</h1>
+    <h1 data-lang="en">Privacy Policy</h1>
+
+    <p class="hero-subtitle" data-lang="fr">
+      Conçue selon le principe de minimisation des données. Aucune information personnelle requise.
+      Chiffrement de bout en bout pour tout ce que vous échangez.
+    </p>
+    <p class="hero-subtitle" data-lang="en">
+      Built around the principle of data minimization. No personal information required.
+      End-to-end encryption for everything you exchange.
+    </p>
+
+    <div class="tagline">
+      <span class="tagline-line"></span>
+      <span class="tagline-text" data-lang-inline="fr">Privé · Anonyme · Chiffré</span>
+      <span class="tagline-text" data-lang-inline="en">Private · Anonymous · Encrypted</span>
+      <span class="tagline-line"></span>
+    </div>
+
+    <div class="meta-strip">
+      <span><strong data-lang-inline="fr">App</strong><strong data-lang-inline="en">App</strong> Ghostr</span>
+      <span class="dot">·</span>
+      <span><strong data-lang-inline="fr">Version</strong><strong data-lang-inline="en">Version</strong> 1.0</span>
+      <span class="dot">·</span>
+      <span data-lang-inline="fr"><strong>Mise à jour</strong> 30 avril 2026</span>
+      <span data-lang-inline="en"><strong>Updated</strong> April 30, 2026</span>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════
+       FRANÇAIS
+       ════════════════════════════════════════ -->
+  <main data-lang="fr">
+
+    <div class="highlight">
+      <div class="highlight-label">TL;DR · En résumé</div>
+      <p>
+        Ghostr ne collecte ni votre nom, ni votre email, ni votre numéro de téléphone.
+        Le développeur n'a <strong>aucun accès</strong> au contenu de vos conversations,
+        chiffrées de bout en bout sur votre appareil. Aucune donnée n'est jamais vendue,
+        louée ou partagée à des fins publicitaires.
+      </p>
+    </div>
+
+    <section class="policy-section" id="fr-1">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2>Ce que Ghostr ne collecte PAS</h2>
+      </div>
+      <p>Pour utiliser Ghostr, vous n'avez <strong>jamais</strong> à fournir :</p>
+      <ul class="nope-list">
+        <li>Votre nom, prénom ou pseudo réel</li>
+        <li>Votre adresse email</li>
+        <li>Votre numéro de téléphone</li>
+        <li>Votre carnet de contacts</li>
+        <li>Votre position géographique (GPS, Wi-Fi, IP)</li>
+        <li>L'historique de vos conversations (côté serveur)</li>
+        <li>Le contenu de vos messages, appels ou fichiers</li>
+        <li>Vos métadonnées d'appel (qui, quand, durée)</li>
+        <li>Identifiants publicitaires (IDFA, GAID)</li>
+        <li>Identifiants matériels (IMEI, MAC, Android ID)</li>
+        <li>Données biométriques</li>
+        <li>Analytics, télémétrie, données comportementales</li>
+      </ul>
+    </section>
+
+    <section class="policy-section" id="fr-2">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2>Données techniques minimales</h2>
+      </div>
+      <p>
+        Seules les données strictement nécessaires à l'acheminement des messages chiffrés
+        transitent par notre infrastructure. <strong>Aucune ne peut être reliée à votre identité réelle.</strong>
+      </p>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Donnée</th>
+              <th>Finalité</th>
+              <th>Durée</th>
+              <th>Lisible par le dév.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Identifiant pseudonyme aléatoire</td>
+              <td>Recevoir des messages chiffrés sur votre appareil</td>
+              <td>Tant que l'app est installée</td>
+              <td><span class="badge badge-no">NON</span> Aucun lien avec votre identité</td>
+            </tr>
+            <tr>
+              <td>Clés cryptographiques publiques</td>
+              <td>Permettre à vos contacts de chiffrer pour vous</td>
+              <td>Renouvelées régulièrement</td>
+              <td><span class="badge badge-no">NON</span> Publiques par construction</td>
+            </tr>
+            <tr>
+              <td>Token de notification push</td>
+              <td>Vous prévenir d'un nouveau message (ping vide)</td>
+              <td>Effacé après chaque envoi</td>
+              <td><span class="badge badge-relay">RELAYÉ</span> Push-proxy isolé</td>
+            </tr>
+            <tr>
+              <td>Charges utiles chiffrées</td>
+              <td>Acheminer les messages au destinataire</td>
+              <td>Supprimées dès livraison (max 7j)</td>
+              <td><span class="badge badge-no">NON</span> Chiffrement de bout en bout</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="policy-section" id="fr-3">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2>Chiffrement de bout en bout</h2>
+      </div>
+      <p>
+        Tous vos messages, appels vocaux (jusqu'à 20 participants) et fichiers sont protégés par un chiffrement
+        de bout en bout résistant au quantique. Le développeur ne peut <strong>techniquement pas</strong> lire
+        vos conversations, identifier vos contacts, ni reconstituer un historique.
+      </p>
+      <div class="crypto-grid">
+        <div class="crypto-card" data-color="primary">
+          <div class="crypto-card-name">Triple Ratchet · ML-KEM-768</div>
+          <div class="crypto-card-desc">
+            Renouvellement permanent des clés avec mixage post-quantique pour chaque message.
+          </div>
+        </div>
+        <div class="crypto-card" data-color="secondary">
+          <div class="crypto-card-name">PQXDH</div>
+          <div class="crypto-card-desc">
+            Établissement de session hybride classique + post-quantique pour le premier échange.
+          </div>
+        </div>
+        <div class="crypto-card" data-color="accent">
+          <div class="crypto-card-name">Sealed Sender</div>
+          <div class="crypto-card-desc">
+            Le serveur ignore qui envoie le message — seul le destinataire le sait.
+          </div>
+        </div>
+        <div class="crypto-card" data-color="warning">
+          <div class="crypto-card-name">OHTTP Routing</div>
+          <div class="crypto-card-desc">
+            Votre adresse IP est dissociée du contenu chiffré via un relais oblivious.
+          </div>
+        </div>
+      </div>
+      <p>
+        Les clés de déchiffrement sont générées <strong>exclusivement</strong> sur votre appareil et n'en sortent jamais.
+      </p>
+    </section>
+
+    <section class="policy-section" id="fr-4">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2>Stockage local sur votre appareil</h2>
+      </div>
+      <p>
+        L'historique de vos conversations, vos contacts Ghostr et vos clés cryptographiques sont
+        stockés <em>uniquement</em> sur votre appareil, dans une base de données chiffrée protégée
+        par une clé dérivée de votre mot de passe via <strong>Argon2id</strong> (paramètres OWASP 2025,
+        64 MiB de mémoire, résistant aux attaques GPU).
+      </p>
+      <p>
+        Vous pouvez exporter vos données chiffrées vers un nouvel appareil via la fonction
+        <strong>Migration</strong> de l'application. Le transfert s'effectue de bout en bout, sans passage par nos serveurs.
+      </p>
+    </section>
+
+    <section class="policy-section" id="fr-5">
+      <div class="section-head">
+        <span class="section-num">05</span>
+        <h2>Services tiers</h2>
+      </div>
+      <p>
+        Ghostr s'appuie sur une architecture <strong>split-trust</strong> où aucun fournisseur unique ne peut
+        corréler votre identité, votre IP et le contenu de vos messages :
+      </p>
+      <ul class="services-list">
+        <li class="service">
+          <div class="service-head">
+            <span class="service-name">Google Firebase Cloud Messaging</span>
+            <span class="service-role">push notifications</span>
+          </div>
+          <div class="service-desc">
+            Reçoit uniquement des <em>pings vides</em> pour réveiller votre appareil. Aucun contenu, aucun expéditeur.
+            Le push token est anonymisé via un proxy intermédiaire qui l'efface immédiatement après usage.
+          </div>
+          <a class="service-link" href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy →</a>
+        </li>
+        <li class="service">
+          <div class="service-head">
+            <span class="service-name">Cloudflare</span>
+            <span class="service-role">relais OHTTP</span>
+          </div>
+          <div class="service-desc">
+            Achemine le trafic chiffré entre votre appareil et notre Gateway. Voit votre IP mais
+            <strong>jamais le contenu</strong> ni le destinataire. Le Gateway voit le contenu chiffré mais
+            <strong>jamais votre IP</strong>.
+          </div>
+          <a class="service-link" href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy →</a>
+        </li>
+        <li class="service">
+          <div class="service-head">
+            <span class="service-name">Supabase</span>
+            <span class="service-role">stockage temporaire</span>
+          </div>
+          <div class="service-desc">
+            Stocke uniquement les charges chiffrées en attente de livraison. Ne voit ni l'expéditeur (Sealed Sender),
+            ni le destinataire en clair, ni le contenu.
+          </div>
+          <a class="service-link" href="https://supabase.com/privacy" target="_blank" rel="noopener">supabase.com/privacy →</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="policy-section" id="fr-6">
+      <div class="section-head">
+        <span class="section-num">06</span>
+        <h2>Suppression de vos données</h2>
+      </div>
+      <p>Vous gardez un contrôle total. À tout moment :</p>
+      <ol class="steps">
+        <li>
+          <strong>Désinstallez l'application.</strong> Toutes les données locales sont supprimées
+          immédiatement et définitivement. Vos pseudonymes côté serveur deviennent inutilisables.
+        </li>
+        <li>
+          <strong>Supprimez votre identifiant pseudonyme</strong> depuis l'app : Paramètres → Sécurité →
+          Supprimer mon compte. Suppression instantanée côté serveur.
+        </li>
+        <li>
+          <strong>Demandez la suppression par email</strong> à <a href="mailto:g6042044@gmail.com"><code>g6042044@gmail.com</code></a>.
+          Traitement sous 30 jours conformément au RGPD.
+        </li>
+      </ol>
+    </section>
+
+    <section class="policy-section" id="fr-7">
+      <div class="section-head">
+        <span class="section-num">07</span>
+        <h2>Mineurs</h2>
+      </div>
+      <p>
+        Ghostr n'est pas destiné aux personnes de moins de 13 ans. Aucune donnée concernant
+        un enfant de moins de 13 ans n'est sciemment collectée. Si vous avez connaissance d'un
+        usage par un mineur de moins de 13 ans, merci de nous contacter pour suppression immédiate.
+      </p>
+    </section>
+
+    <section class="policy-section" id="fr-8">
+      <div class="section-head">
+        <span class="section-num">08</span>
+        <h2>Vos droits (RGPD)</h2>
+      </div>
+      <p>
+        Conformément au Règlement Général sur la Protection des Données, vous disposez des droits
+        d'<strong>accès</strong>, de <strong>rectification</strong>, d'<strong>effacement</strong>,
+        de <strong>portabilité</strong>, de <strong>limitation</strong> et d'<strong>opposition</strong>.
+      </p>
+      <p>
+        Pour exercer ces droits, contactez-nous à <a href="mailto:g6042044@gmail.com"><code>g6042044@gmail.com</code></a>. Vous pouvez
+        également déposer une réclamation auprès de la <a href="https://www.cnil.fr" target="_blank" rel="noopener">CNIL</a> (autorité française de protection des données).
+      </p>
+    </section>
+
+    <section class="policy-section" id="fr-9">
+      <div class="section-head">
+        <span class="section-num">09</span>
+        <h2>Modifications</h2>
+      </div>
+      <p>
+        Cette politique peut être mise à jour. Toute modification importante sera notifiée
+        directement <em>dans l'application</em> avant son entrée en vigueur. La date de dernière
+        mise à jour est indiquée en haut de page.
+      </p>
+    </section>
+
+    <section class="policy-section" id="fr-10">
+      <div class="section-head">
+        <span class="section-num">10</span>
+        <h2>Contact</h2>
+      </div>
+      <p>
+        Pour toute question concernant cette politique ou pour exercer vos droits :
+      </p>
+      <p>
+        <strong>Email :</strong> <a href="mailto:g6042044@gmail.com"><code>g6042044@gmail.com</code></a>
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ════════════════════════════════════════
+       ENGLISH
+       ════════════════════════════════════════ -->
+  <main data-lang="en">
+
+    <div class="highlight">
+      <div class="highlight-label">TL;DR · Summary</div>
+      <p>
+        Ghostr collects no name, no email, no phone number. The developer has
+        <strong>no access</strong> to your conversations — they are end-to-end encrypted on your device.
+        No data is ever sold, rented, or shared for advertising purposes.
+      </p>
+    </div>
+
+    <section class="policy-section" id="en-1">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2>What Ghostr does NOT collect</h2>
+      </div>
+      <p>To use Ghostr, you <strong>never</strong> need to provide:</p>
+      <ul class="nope-list">
+        <li>Your real name, surname, or alias</li>
+        <li>Your email address</li>
+        <li>Your phone number</li>
+        <li>Your contact list</li>
+        <li>Your geographic location (GPS, Wi-Fi, IP)</li>
+        <li>Conversation history (server-side)</li>
+        <li>Message, call, or file content</li>
+        <li>Call metadata (who, when, duration)</li>
+        <li>Advertising identifiers (IDFA, GAID)</li>
+        <li>Hardware identifiers (IMEI, MAC, Android ID)</li>
+        <li>Biometric data</li>
+        <li>Analytics, telemetry, behavioral data</li>
+      </ul>
+    </section>
+
+    <section class="policy-section" id="en-2">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2>Minimal technical data</h2>
+      </div>
+      <p>
+        Only data strictly necessary for routing encrypted messages transits our infrastructure.
+        <strong>None of it can be linked to your real identity.</strong>
+      </p>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Purpose</th>
+              <th>Retention</th>
+              <th>Readable by dev</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Random pseudonymous identifier</td>
+              <td>Receive encrypted messages on your device</td>
+              <td>While app is installed</td>
+              <td><span class="badge badge-no">NO</span> No link to your identity</td>
+            </tr>
+            <tr>
+              <td>Public cryptographic keys</td>
+              <td>Allow contacts to encrypt messages for you</td>
+              <td>Rotated regularly</td>
+              <td><span class="badge badge-no">NO</span> Public by design</td>
+            </tr>
+            <tr>
+              <td>Push notification token</td>
+              <td>Wake your device on new message (empty ping)</td>
+              <td>Erased after each send</td>
+              <td><span class="badge badge-relay">RELAYED</span> Isolated push proxy</td>
+            </tr>
+            <tr>
+              <td>Encrypted payloads</td>
+              <td>Route messages to recipient</td>
+              <td>Deleted on delivery (max 7d)</td>
+              <td><span class="badge badge-no">NO</span> End-to-end encrypted</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="policy-section" id="en-3">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2>End-to-end encryption</h2>
+      </div>
+      <p>
+        All messages, voice calls (up to 20 participants), and files are protected by quantum-resistant
+        end-to-end encryption. The developer <strong>technically cannot</strong> read your conversations,
+        identify your contacts, or reconstruct your history.
+      </p>
+      <div class="crypto-grid">
+        <div class="crypto-card" data-color="primary">
+          <div class="crypto-card-name">Triple Ratchet · ML-KEM-768</div>
+          <div class="crypto-card-desc">
+            Continuous key rotation with post-quantum mixing for every message.
+          </div>
+        </div>
+        <div class="crypto-card" data-color="secondary">
+          <div class="crypto-card-name">PQXDH</div>
+          <div class="crypto-card-desc">
+            Hybrid classical + post-quantum session establishment on first contact.
+          </div>
+        </div>
+        <div class="crypto-card" data-color="accent">
+          <div class="crypto-card-name">Sealed Sender</div>
+          <div class="crypto-card-desc">
+            The server doesn't know who sent the message — only the recipient does.
+          </div>
+        </div>
+        <div class="crypto-card" data-color="warning">
+          <div class="crypto-card-name">OHTTP Routing</div>
+          <div class="crypto-card-desc">
+            Your IP address is decoupled from encrypted content via an oblivious relay.
+          </div>
+        </div>
+      </div>
+      <p>
+        Decryption keys are generated <strong>exclusively</strong> on your device and never leave it.
+      </p>
+    </section>
+
+    <section class="policy-section" id="en-4">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2>Local storage on your device</h2>
+      </div>
+      <p>
+        Conversation history, Ghostr contacts, and cryptographic keys are stored <em>only</em> on your device,
+        in an encrypted database protected by a key derived from your password via <strong>Argon2id</strong>
+        (OWASP 2025 parameters, 64 MiB memory, GPU-attack resistant).
+      </p>
+      <p>
+        You can export your encrypted data to a new device through the <strong>Migration</strong> feature in
+        the app. Transfer is end-to-end, never touching our servers.
+      </p>
+    </section>
+
+    <section class="policy-section" id="en-5">
+      <div class="section-head">
+        <span class="section-num">05</span>
+        <h2>Third-party services</h2>
+      </div>
+      <p>
+        Ghostr uses a <strong>split-trust</strong> architecture where no single provider can correlate
+        your identity, your IP, and the content of your messages:
+      </p>
+      <ul class="services-list">
+        <li class="service">
+          <div class="service-head">
+            <span class="service-name">Google Firebase Cloud Messaging</span>
+            <span class="service-role">push notifications</span>
+          </div>
+          <div class="service-desc">
+            Receives only <em>empty pings</em> to wake your device. No content, no sender.
+            The push token is anonymized via an intermediate proxy that erases it immediately after use.
+          </div>
+          <a class="service-link" href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy →</a>
+        </li>
+        <li class="service">
+          <div class="service-head">
+            <span class="service-name">Cloudflare</span>
+            <span class="service-role">OHTTP relay</span>
+          </div>
+          <div class="service-desc">
+            Routes encrypted traffic between your device and our Gateway. Sees your IP but
+            <strong>never the content</strong> or recipient. The Gateway sees encrypted content but
+            <strong>never your IP</strong>.
+          </div>
+          <a class="service-link" href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy →</a>
+        </li>
+        <li class="service">
+          <div class="service-head">
+            <span class="service-name">Supabase</span>
+            <span class="service-role">temporary storage</span>
+          </div>
+          <div class="service-desc">
+            Stores only encrypted payloads pending delivery. Sees neither sender (Sealed Sender),
+            nor recipient in cleartext, nor content.
+          </div>
+          <a class="service-link" href="https://supabase.com/privacy" target="_blank" rel="noopener">supabase.com/privacy →</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="policy-section" id="en-6">
+      <div class="section-head">
+        <span class="section-num">06</span>
+        <h2>Data deletion</h2>
+      </div>
+      <p>You stay in full control. At any time:</p>
+      <ol class="steps">
+        <li>
+          <strong>Uninstall the app.</strong> All local data is deleted immediately and permanently.
+          Your server-side pseudonyms become unusable.
+        </li>
+        <li>
+          <strong>Delete your pseudonymous identifier</strong> from the app: Settings → Security →
+          Delete account. Instant server-side deletion.
+        </li>
+        <li>
+          <strong>Email a deletion request</strong> to <a href="mailto:g6042044@gmail.com"><code>g6042044@gmail.com</code></a>.
+          Processed within 30 days per GDPR requirements.
+        </li>
+      </ol>
+    </section>
+
+    <section class="policy-section" id="en-7">
+      <div class="section-head">
+        <span class="section-num">07</span>
+        <h2>Minors</h2>
+      </div>
+      <p>
+        Ghostr is not intended for users under 13. No data concerning a child under 13 is knowingly
+        collected. If you become aware of such use, please contact us for immediate deletion.
+      </p>
+    </section>
+
+    <section class="policy-section" id="en-8">
+      <div class="section-head">
+        <span class="section-num">08</span>
+        <h2>Your rights (GDPR)</h2>
+      </div>
+      <p>
+        Under the General Data Protection Regulation, you have the right to <strong>access</strong>,
+        <strong>rectify</strong>, <strong>erase</strong>, <strong>port</strong>, <strong>restrict</strong>,
+        and <strong>object to</strong> processing.
+      </p>
+      <p>
+        To exercise these rights, contact us at <a href="mailto:g6042044@gmail.com"><code>g6042044@gmail.com</code></a>. You may also file
+        a complaint with the <a href="https://www.cnil.fr/en" target="_blank" rel="noopener">CNIL</a> (French data protection authority).
+      </p>
+    </section>
+
+    <section class="policy-section" id="en-9">
+      <div class="section-head">
+        <span class="section-num">09</span>
+        <h2>Updates</h2>
+      </div>
+      <p>
+        This policy may be updated. Material changes will be notified <em>inside the app</em> before
+        taking effect. The last update date is shown at the top of the page.
+      </p>
+    </section>
+
+    <section class="policy-section" id="en-10">
+      <div class="section-head">
+        <span class="section-num">10</span>
+        <h2>Contact</h2>
+      </div>
+      <p>
+        For any question about this policy or to exercise your rights:
+      </p>
+      <p>
+        <strong>Email:</strong> <a href="mailto:g6042044@gmail.com"><code>g6042044@gmail.com</code></a>
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-tagline">
+      <span class="footer-tagline-line"></span>
+      <span class="footer-tagline-text" data-lang-inline="fr">Conçu pour ceux qui ont quelque chose à protéger</span>
+      <span class="footer-tagline-text" data-lang-inline="en">Built for those with something worth protecting</span>
+      <span class="footer-tagline-line"></span>
+    </div>
+    <nav class="footer-nav">
+      <a href="./support.html" data-lang-inline="fr">Support &amp; aide</a>
+      <a href="./support.html" data-lang-inline="en">Support &amp; help</a>
+      <span class="footer-sep">·</span>
+      <a href="mailto:g6042044@gmail.com">g6042044@gmail.com</a>
+    </nav>
+    <div class="footer-meta">
+      © 2026 Ghostr · <span data-lang-inline="fr">Tous droits réservés</span><span data-lang-inline="en">All rights reserved</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // ─────────────────────────────────────────────
+  //  Language toggle
+  // ─────────────────────────────────────────────
+  (function() {
+    const body = document.body;
+    const buttons = document.querySelectorAll('[data-set-lang]');
+
+    function setLang(lang) {
+      body.setAttribute('data-current-lang', lang);
+      buttons.forEach(btn => {
+        const isActive = btn.dataset.setLang === lang;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive);
+      });
+      try { localStorage.setItem('ghostr-pp-lang', lang); } catch(e) {}
+      document.documentElement.setAttribute('lang', lang);
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => setLang(btn.dataset.setLang));
+    });
+
+    // Restore preferred language
+    let initial = 'fr';
+    try {
+      const saved = localStorage.getItem('ghostr-pp-lang');
+      if (saved === 'fr' || saved === 'en') initial = saved;
+      else if ((navigator.language || '').toLowerCase().startsWith('en')) initial = 'en';
+    } catch(e) {}
+    setLang(initial);
+  })();
+</script>
+
+</body>
+</html>

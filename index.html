@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ghostr — Messagerie chiffrée, anonyme, post-quantique</title>
-<meta name="description" content="Messagerie chiffrée de bout en bout avec Triple Ratchet post-quantique (ML-KEM-768), Sealed Sender, OHTTP split-trust et trafic constant. Aucune donnée personnelle requise.">
+<title>Ghostr — Messagerie privée chiffrée de bout en bout</title>
+<meta name="description" content="Messagerie chiffrée de bout en bout avec Triple Ratchet post-quantique (ML-KEM-768), Sealed Sender et OHTTP split-trust. Aucun numéro, aucun email, aucune publicité.">
 <meta name="theme-color" content="#0A0F14">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Ghostr — Messagerie chiffrée, anonyme, post-quantique">
-<meta property="og:description" content="Triple Ratchet post-quantique · Sealed Sender · OHTTP split-trust · Aucune donnée personnelle.">
+<meta property="og:title" content="Ghostr — Messagerie privée chiffrée de bout en bout">
+<meta property="og:description" content="Triple Ratchet post-quantique · Sealed Sender · OHTTP split-trust · Aucune publicité, aucun tracker.">
 <meta property="og:image" content="./assets/icon_nobg.png">
 <meta property="og:type" content="website">
 
@@ -1199,14 +1199,14 @@
     <h1 data-lang="en">Your conversations.<br>And <span class="accent">nobody</span> else.</h1>
 
     <p class="hero-subtitle" data-lang="fr">
-      Une messagerie conçue pour résister aux menaces actuelles
-      <strong>et futures</strong>. Pas de numéro, pas d'email, pas de carnet de
-      contacts. Juste vos messages, chiffrés de bout en bout sur votre appareil.
+      Une messagerie privée qui chiffre vos messages et vos appels sur votre appareil.
+      <strong>Aucun numéro, aucun email, aucun carnet de contacts.</strong>
+      Juste vos conversations, chiffrées de bout en bout.
     </p>
     <p class="hero-subtitle" data-lang="en">
-      A messenger built to resist <strong>today's and tomorrow's</strong>
-      threats. No phone number, no email, no address book. Just your messages,
-      end-to-end encrypted on your device.
+      A private messenger that encrypts your messages and calls on your device.
+      <strong>No phone number, no email, no address book.</strong>
+      Just your conversations, end-to-end encrypted.
     </p>
 
     <div class="hero-cta">
@@ -1224,8 +1224,8 @@
 
     <div class="tagline">
       <span class="tagline-line"></span>
-      <span class="tagline-text" data-lang-inline="fr">Privé · Anonyme · Chiffré</span>
-      <span class="tagline-text" data-lang-inline="en">Private · Anonymous · Encrypted</span>
+      <span class="tagline-text" data-lang-inline="fr">Privé · Sécurisé · Chiffré</span>
+      <span class="tagline-text" data-lang-inline="en">Private · Secure · Encrypted</span>
       <span class="tagline-line"></span>
     </div>
   </header>
@@ -1273,15 +1273,14 @@
         Ghostr part d'un autre principe : <strong>les meilleures données sont celles qu'on
         ne collecte jamais</strong>. Pas d'identifiant lié à votre vie réelle. Pas de carnet
         de contacts uploadé. Pas de graphe social reconstructible. Pas de métadonnées d'appel.
-        Pas même la possibilité, pour le développeur, de savoir si vous utilisez l'application aujourd'hui.
+        Aucune publicité, aucun tracker, aucun profil publicitaire.
       </p>
       <p>
-        Ce niveau d'anonymat ne vient pas d'une simple promesse. Il est <strong>imposé par
-        l'architecture</strong> : le chiffrement de bout en bout empêche le développeur de lire
-        les messages, le <em>Sealed Sender</em> empêche le serveur de savoir qui envoie, le routage
-        <em>OHTTP split-trust</em> empêche un acteur unique de corréler IP et contenu, le
-        <em>trafic constant</em> avec décoys masque l'activité — et le tout repose sur des protocoles
-        cryptographiques résistants aux ordinateurs quantiques de demain.
+        Cette confidentialité ne repose pas sur une simple promesse. Elle est <strong>garantie par
+        l'architecture</strong> : le chiffrement de bout en bout protège le contenu de vos messages, le
+        <em>Sealed Sender</em> sépare l'expéditeur du contenu transporté, le routage
+        <em>OHTTP split-trust</em> sépare l'adresse IP du contenu — le tout sur des protocoles
+        cryptographiques publiés, audités, et résistants aux ordinateurs quantiques de demain.
       </p>
     </div>
   </section>
@@ -1301,15 +1300,14 @@
       <p>
         Ghostr starts from another principle: <strong>the best data is data you never collect</strong>.
         No identifier tied to your real life. No uploaded contact list. No reconstructable
-        social graph. No call metadata. Not even the ability, for the developer, to know
-        whether you're using the app today.
+        social graph. No call metadata. No ads, no trackers, no advertising profile.
       </p>
       <p>
-        This level of anonymity isn't a promise — it's <strong>enforced by architecture</strong>:
-        end-to-end encryption keeps the developer from reading messages, <em>Sealed Sender</em>
-        keeps the server from learning who sent, <em>OHTTP split-trust</em> keeps any single
-        party from correlating IP and content, <em>constant traffic</em> with decoys masks
-        activity — all on top of cryptographic protocols resistant to tomorrow's quantum computers.
+        This privacy isn't just a promise — it's <strong>guaranteed by architecture</strong>:
+        end-to-end encryption protects the content of your messages, <em>Sealed Sender</em>
+        separates the sender from the transported content, <em>OHTTP split-trust</em>
+        separates the IP address from the content — all on top of published, audited
+        cryptographic protocols resistant to tomorrow's quantum computers.
       </p>
     </div>
   </section>
@@ -2045,7 +2043,7 @@
         <ul data-lang="fr">
           <li>Compromission de votre appareil physique (malware, screen capture)</li>
           <li>Captures d'écran ou photos de l'écran par votre interlocuteur</li>
-          <li>Coercition légale ou physique pour vous forcer à déchiffrer</li>
+          <li>Accès physique non autorisé à un appareil déverrouillé</li>
           <li>Mot de passe trivial ou réutilisé (vous restez responsable)</li>
           <li>Identité révélée volontairement <em>dans</em> les messages</li>
           <li>Métadonnées globales si plusieurs acteurs colludent (Cloudflare + Gateway + Supabase)</li>
@@ -2054,7 +2052,7 @@
         <ul data-lang="en">
           <li>Compromise of your physical device (malware, screen capture)</li>
           <li>Screenshots or photos of the screen by your contact</li>
-          <li>Legal or physical coercion forcing you to decrypt</li>
+          <li>Unauthorized physical access to an unlocked device</li>
           <li>Trivial or reused passwords (your responsibility)</li>
           <li>Identity voluntarily revealed <em>inside</em> messages</li>
           <li>Global metadata if multiple parties collude (Cloudflare + Gateway + Supabase)</li>
@@ -2111,7 +2109,7 @@
       <a class="ref-card" href="https://signal.org/blog/sealed-sender/" target="_blank" rel="noopener">
         <div class="ref-card-tag">Design · 2018</div>
         <h4>Signal — Sealed Sender</h4>
-        <p>Anonymous sender with HMAC certificates</p>
+        <p>Sender metadata protection with HMAC certificates</p>
         <div class="ref-card-arrow">signal.org →</div>
       </a>
       <a class="ref-card" href="https://www.rfc-editor.org/rfc/rfc9106.html" target="_blank" rel="noopener">
@@ -2154,8 +2152,8 @@
   <div class="container">
     <div class="footer-tagline">
       <span class="footer-tagline-line"></span>
-      <span class="footer-tagline-text" data-lang-inline="fr">Conçu pour ceux qui ont quelque chose à protéger</span>
-      <span class="footer-tagline-text" data-lang-inline="en">Built for those with something worth protecting</span>
+      <span class="footer-tagline-text" data-lang-inline="fr">Conçu pour celles et ceux qui tiennent à la confidentialité de leurs conversations</span>
+      <span class="footer-tagline-text" data-lang-inline="en">Built for people who care about the privacy of their conversations</span>
       <span class="footer-tagline-line"></span>
     </div>
     <nav class="footer-nav">

@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.ghostr.app",
+      "sha256_cert_fingerprints": [
+        "A4:84:1A:80:47:80:94:10:13:55:10:36:FB:B8:05:06:4B:EA:12:71:8D:C4:C2:32:F0:91:61:0A:C0:AD:4D:AE"
+      ]
+    }
+  }
+]
